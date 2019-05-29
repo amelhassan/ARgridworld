@@ -57,6 +57,9 @@
      <Compile Include="Assets\Item.cs" />
      <Compile Include="Assets\ItemList.cs" />
      <Compile Include="Assets\JsonFileReader.cs" />
+     <Compile Include="Assets\outsidePaths.cs" />
+     <Compile Include="Assets\Paths.cs" />
+     <Compile Include="Assets\pathtest.cs" />
      <Compile Include="Assets\PopulateGrid.cs" />
      <Compile Include="Assets\PopulateMap.cs" />
      <Compile Include="Assets\Scripts\DataLoader.cs" />
