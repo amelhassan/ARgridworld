@@ -11,6 +11,8 @@ public class PopulateMap : MonoBehaviour {
 	public Tilemap tileWorld;
 	public TileBase tileBase;
 	private Vector3Int tilePosition = new Vector3Int(0,0,0); // init pos 
+    private  
+
 
 	// Obtain JSON file 
 	void Awake(){
@@ -22,9 +24,19 @@ public class PopulateMap : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		tilePosition.x = currItem.item_PosX;
-		tilePosition.y = currItem.item_PosY;
-		tileWorld.SetTile(tilePosition, tileBase);
+        Debug.Log("THE ORIGIN IS:"); 
+        Debug.Log(tileWorld.origin.x);
+        tilePosition.x = 0;
+        tilePosition.y = 0; 
+        //int[] positions_x = new int[10] { 3, 6, -4, 2, 8, -4, 6, 10, -9, 8};
+        //int[] positions_y = new int[10] {5, -2, 3, 8, 6, -5, 3, 1, 0, 5}; 
+
+        //for(int i = 0; i < 10; i++)
+        //{
+        //    tilePosition.x = tileWorld.origin.x + positions_x[i];
+        //    tilePosition.y = tileWorld.origin.y + positions_y[i];
+         tileWorld.SetTile(tilePosition, tileBase); 
+        //}
 	}
 	
 	// Update is called once per frame
