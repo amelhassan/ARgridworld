@@ -9,6 +9,8 @@ public class Paths : MonoBehaviour {
 	private Vector3[] waypoints;
 	private Vector3 gridcenter;
 	private Grid gridWorld;
+	public GameObject targetObj;
+	private qrTrackableEventHandler the_script;
 	int seg = 5;
 
 	// Use this for initialization
@@ -22,30 +24,55 @@ public class Paths : MonoBehaviour {
 
 		// Test new cell 
 		newcell = new Vector3Int(5,4,0);
+
+		// Get gameobject representing Cozmo's target/goal
+		the_script = targetObj.GetComponent<qrTrackableEventHandler>();
+
+		//bool tracking_status = the_script.IsTracked;
+		//bool is_tracked = targetObj.GetComponent<IsTracked>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+		Debug.Log("VALUE OF BOOL: ");
+		Debug.Log(the_script.isTracked);
+
+		if (the_script.isTracked){
+			Transform target_transform = targetObj.transform;
+			newcell.x = (int)target_transform.position.x;
+			newcell.y = (int)target_transform.position.y;
+			newcell.z = (int)target_transform.position.z;
+			// FIX: Should convert world coordiantes to local (but cell seems to work better)
+			newcell = gridWorld.WorldToCell(newcell);
+			Debug.Log("POS of TARGET CELL");
+			Debug.Log(newcell);
+
+			Vector3 target_local = gridWorld.WorldToLocal(newcell);
+			Debug.Log("POS of TARGET LOCAL");
+			Debug.Log(target_local);
+		}
+
 		gridcenter = gridWorld.LocalToCell(transform.localPosition);
 		
 		// Testing 
 		// Want: Give a cell coordinate, give local coordinates of that cell 
 		// Given GRID coordinate convert to LOCAL coordinates 
-		Debug.Log("START");
-		Debug.Log("Original pos");
-		Debug.Log(newcell);
-		Debug.Log("Cell to Local");
-		Debug.Log(gridWorld.CellToLocal(newcell));
-		Debug.Log("Cell to World");
-		Debug.Log(gridWorld.CellToWorld(newcell));
-		Debug.Log("Cell to World to Local");
-		Debug.Log(gridWorld.WorldToLocal(gridWorld.CellToWorld(newcell)));
+		// Debug.Log("START");
+		// Debug.Log("Original pos");
+		// Debug.Log(newcell);
+		// Debug.Log("Cell to Local");
+		// Debug.Log(gridWorld.CellToLocal(newcell));
+		// Debug.Log("Cell to World");
+		// Debug.Log(gridWorld.CellToWorld(newcell));
+		// Debug.Log("Cell to World to Local");
+		// Debug.Log(gridWorld.WorldToLocal(gridWorld.CellToWorld(newcell)));
 		// Debug.Log("Local to Cell");
 		// Debug.Log(gridWorld.LocalToCell(newcell));
 		// Debug.Log("World to Cell");
 		// Debug.Log(gridWorld.WorldToCell(newcell));
-		Debug.Log("FINISH");
+		//Debug.Log("FINISH");
+
 		Vector3 ph = gridWorld.CellToWorld(newcell);
 		//newcell = new Vector3Int((int)ph.x, (int)ph.y, (int)ph.z);
 		Line(newcell);
