@@ -15,31 +15,29 @@ public class Paths : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// For path initialization:
 		linerender = GetComponent<LineRenderer>();
 		waypoints = new Vector3[seg];
 		
-		// Set positions based on grid world 
+		// Set positions based on grid world:
 		gridcenter = new Vector3(); 
 		gridWorld = transform.parent.GetComponent<Grid>();
 
-		// Test new cell 
+		// For testing: 
 		newcell = new Vector3Int(5,4,0);
 
-		// Get gameobject representing Cozmo's target/goal
+		// Get gameobject representing Cozmo's target/goal:
 		the_script = targetObj.GetComponent<qrTrackableEventHandler>();
-
-		//bool tracking_status = the_script.IsTracked;
-		//bool is_tracked = targetObj.GetComponent<IsTracked>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		Debug.Log("VALUE OF BOOL: ");
+		Debug.Log("TARGET BEING TRACKED?: ");
 		Debug.Log(the_script.isTracked);
 
 		if (the_script.isTracked){
-			Transform target_transform = targetObj.transform;
+			Transform target_transform = targetObj.transform; // get QR's pos in world frame
 			newcell.x = (int)target_transform.position.x;
 			newcell.y = (int)target_transform.position.y;
 			newcell.z = (int)target_transform.position.z;
@@ -72,8 +70,6 @@ public class Paths : MonoBehaviour {
 		// Debug.Log("World to Cell");
 		// Debug.Log(gridWorld.WorldToCell(newcell));
 		//Debug.Log("FINISH");
-
-		Vector3 ph = gridWorld.CellToWorld(newcell);
 		//newcell = new Vector3Int((int)ph.x, (int)ph.y, (int)ph.z);
 		Line(newcell);
 		
@@ -85,9 +81,11 @@ public class Paths : MonoBehaviour {
 		waypoints[2] = new Vector3(gridcenter.x + 20, gridcenter.y + 20, gridcenter.z);
 		waypoints[3] = new Vector3(gridcenter.x + 30, gridcenter.y + 20, gridcenter.z);
 		waypoints[4] = new Vector3(gridcenter.x + 30, gridcenter.y + 30, gridcenter.z);
+		
 		// for (int i = 0; i < waypoints.Length; i++){
 		//  	vals[i] = points[i].position;
 		//  }
+		
 		for (int i = 0; i < seg; i++){
 		 	//float t = i / (float)seg;
 		 	linerender.positionCount = seg;
