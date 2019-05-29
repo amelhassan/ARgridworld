@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\convert_to_json.cs" />
+    <Compile Include="Assets\DrawGrid.cs" />
+    <Compile Include="Assets\DrawGridLines.cs" />
     <Compile Include="Assets\Item.cs" />
     <Compile Include="Assets\ItemList.cs" />
     <Compile Include="Assets\JsonFileReader.cs" />
@@ -311,9 +313,6 @@
     <Reference Include="Vuforia.UnityExtensions">
       <HintPath>/Applications/Unity/Hub/Editor/2019.1.1f1/PlaybackEngines/VuforiaSupport/Managed/Runtime/Vuforia.UnityExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>/Users/17dempsey/Desktop/SummerResearch2019/ARgridworld/unity_project/Library/PackageCache/com.unity.ads@2.0.8/UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>/Users/17dempsey/Desktop/SummerResearch2019/ARgridworld/unity_project/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -322,9 +321,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>/Users/17dempsey/Desktop/SummerResearch2019/ARgridworld/unity_project/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>/Users/17dempsey/Desktop/SummerResearch2019/ARgridworld/unity_project/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>/Applications/Unity/Hub/Editor/2019.1.1f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
