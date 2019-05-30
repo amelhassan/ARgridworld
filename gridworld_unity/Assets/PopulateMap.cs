@@ -9,7 +9,8 @@ public class PopulateMap : MonoBehaviour {
 
 	public Item currItem;
 	public Tilemap tileWorld;
-	public TileBase tileBase;
+	public TileBase cozmo;
+    public TileBase green; 
 	private Vector3Int tilePosition = new Vector3Int(0,0,0); // init pos 
 
 	// Obtain JSON file 
@@ -27,10 +28,17 @@ public class PopulateMap : MonoBehaviour {
 		//tileWorld.SetTile(tilePosition, tileBase);
 	}
 
-    public void MakeTile (Vector3Int cell)
+    public void MakeTile (int x, int y)
     {
-        Debug.Log("In MakeTile\n"); 
-        tileWorld.SetTile(cell, tileBase); 
+        if((tilePosition.x != x) || (tilePosition.y != y))
+        {
+            tileWorld.SetTile(tilePosition, green); 
+            //Debug.Log("In MakeTile\n");
+            tilePosition.x = x;
+            tilePosition.y = y;
+            tileWorld.SetTile(tilePosition, cozmo);
+        }
+       
     }
 
     // Update is called once per frame

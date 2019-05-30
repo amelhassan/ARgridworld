@@ -8,6 +8,8 @@ public class gridpos : MonoBehaviour
 {
     public Tilemap curr_tilemap;
 	public GameObject qr_gameobj;
+
+    public int scaler = 1; 
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +19,15 @@ public class gridpos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	Debug.Log("QR Transform POS");
-    	Debug.Log(qr_gameobj.transform.position);
-        curr_tilemap.origin = new Vector3Int((int) qr_gameobj.transform.position.x + 1,
-            (int)qr_gameobj.transform.position.y, (int) qr_gameobj.transform.position.x);
-        Debug.Log("Tilemap ORIGIN");
-        Debug.Log(curr_tilemap.origin);
-        //transform.position = qr_gameobj.transform.position; 
+    	//Debug.Log("QR Transform POS");
+    	//Debug.Log(qr_gameobj.transform.position);
+
+       curr_tilemap.origin = new Vector3Int((int) qr_gameobj.transform.position.x + scaler,
+            (int)qr_gameobj.transform.position.y, (int) qr_gameobj.transform.position.z);
+
+        //Debug.Log("Tilemap ORIGIN");
+        //Debug.Log(curr_tilemap.origin);
+       //transform.position = qr_gameobj.transform.position; 
         	//qr_gameobj.transform.TransformDirection(new Vector3(0,1,-1));
 
         //Debug.Log("New current object transformation");
