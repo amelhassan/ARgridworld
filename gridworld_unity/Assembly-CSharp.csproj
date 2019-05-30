@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\convert_to_json.cs" />
+    <Compile Include="Assets\CozmoGridPos.cs" />
     <Compile Include="Assets\gridpos.cs" />
     <Compile Include="Assets\Item.cs" />
     <Compile Include="Assets\ItemList.cs" />

@@ -779,6 +779,7 @@ GameObject:
   - component: {fileID: 592992978}
   - component: {fileID: 592992980}
   - component: {fileID: 592992981}
+  - component: {fileID: 592992982}
   m_Layer: 0
   m_Name: GridIcons
   m_TagString: Untagged
@@ -65541,6 +65542,22 @@ PositionConstraint:
   m_Sources:
   - sourceTransform: {fileID: 1437897185}
     weight: 1
+--- !u!114 &592992982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592992976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba44690fb57744491b1ce4a393316d5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curr_map: {fileID: 1292549364}
+  curr_tilemap: {fileID: 592992979}
+  gridWorld: {fileID: 1724687794}
+  qr_cozmo: {fileID: 2072700242}
 --- !u!1 &593152819
 GameObject:
   m_ObjectHideFlags: 0
@@ -67403,7 +67420,7 @@ MonoBehaviour:
     item_PosX: 0
     item_PosY: 0
   tileWorld: {fileID: 592992979}
-  tileBase: {fileID: 11400000, guid: a13b438f7a84c467bac111bc336a419a, type: 2}
+  tileBase: {fileID: 11400000, guid: fa51efb6fcce1495082fb36d6aa708f9, type: 2}
 --- !u!1 &1327169599
 GameObject:
   m_ObjectHideFlags: 0
