@@ -32,7 +32,7 @@ public class PopulateMap : MonoBehaviour {
     {
         if((tilePosition.x != x) || (tilePosition.y != y))
         {
-            tileWorld.SetTile(tilePosition, green); 
+            //tileWorld.SetTile(tilePosition, green); 
             //Debug.Log("In MakeTile\n");
             tilePosition.x = x;
             tilePosition.y = y;

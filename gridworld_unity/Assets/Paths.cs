@@ -1,16 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps; 
 [RequireComponent (typeof(LineRenderer))]
+
+
 public class Paths : MonoBehaviour {
-	LineRenderer linerender;
+    public GameObject targetObj;
+    public GameObject cozmo;
+    public PopulateMap tilemap; 
+
+    LineRenderer linerender;
 	//private Transform[] points; // vector of waypoints, make public later on 
-	private Vector3Int newcell;
-	private Vector3[] waypoints;
+    private Vector3[] waypoints;
 	private Vector3 gridcenter;
 	private Grid gridWorld;
-	public GameObject targetObj;
-	private qrTrackableEventHandler the_script;
+	private qrTrackableEventHandler targetTracker;
+    private qrTrackableEventHandler cozmoTracker; 
+    private 
 	int seg = 5;
 
 	// Use this for initialization
@@ -23,35 +30,43 @@ public class Paths : MonoBehaviour {
 		gridcenter = new Vector3(); 
 		gridWorld = transform.parent.GetComponent<Grid>();
 
-		// For testing: 
-		newcell = new Vector3Int(5,4,0);
+        //// For testing: 
+        ////newcell = new Vector3Int(5,4,0);
+        //startingcell = new Vector3Int();
+        //startingcell = gridWorld.LocalToCell(cozmo.transform.localPosition);
 
-		// Get gameobject representing Cozmo's target/goal:
-		the_script = targetObj.GetComponent<qrTrackableEventHandler>();
+        //// Get gameobject representing Cozmo's target/goal:
+        //// My code: 
+        //endingcell = new Vector3Int();
+        //endingcell = gridWorld.LocalToCell(targetObj.transform.localPosition); 
+
+        targetTracker = targetObj.GetComponent<qrTrackableEventHandler>();
+        cozmoTracker = cozmo.GetComponent<qrTrackableEventHandler>(); 
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-		//Debug.Log("TARGET BEING TRACKED?: ");
-		//Debug.Log(the_script.isTracked);
 
-		if (the_script.isTracked){
-			Transform target_transform = targetObj.transform; // get QR's pos in world frame
-			newcell.x = (int)target_transform.position.x;
-			newcell.y = (int)target_transform.position.y;
-			newcell.z = (int)target_transform.position.z;
-			// FIX: Should convert world coordiantes to local (but cell seems to work better)
-			newcell = gridWorld.WorldToCell(newcell);
-			//Debug.Log("POS of TARGET CELL");
-			//Debug.Log(newcell);
+		if (targetTracker.isTracked && cozmoTracker.isTracked){
+            // FIX: Should convert world coordiantes to local (but cell seems to work better)
+            //startingcell = gridWorld.WorldToCell(startingcell);
+            //Vector3 startingcell = gridWorld.LocalToCell(cozmo.transform.localPosition);
 
-			Vector3 target_local = gridWorld.WorldToLocal(newcell);
-			//Debug.Log("POS of TARGET LOCAL");
-			//Debug.Log(target_local);
+            Debug.Log("POS OF STARTINGCELL in local");
+            Debug.Log(cozmo.transform.localPosition);
+
+            //Vector3 endingcell = gridWorld.LocalToCell(targetObj.transform.localPosition);
+            Debug.Log("POS of TARGET CELL in local");
+			Debug.Log(targetObj.transform.localPosition);
+
+            Line(cozmo.transform.localPosition, targetObj.transform.localPosition); 
+
 		}
 
-		gridcenter = gridWorld.LocalToCell(transform.localPosition);
+		
+        /**** AMEL'S CODE ****/ 
+        //gridcenter = gridWorld.LocalToCell(transform.localPosition);
 		
 		// Testing 
 		// Want: Give a cell coordinate, give local coordinates of that cell 
@@ -71,25 +86,74 @@ public class Paths : MonoBehaviour {
 		// Debug.Log(gridWorld.WorldToCell(newcell));
 		//Debug.Log("FINISH");
 		//newcell = new Vector3Int((int)ph.x, (int)ph.y, (int)ph.z);
-		Line(newcell);
+		//Line(newcell);
+        /**** END ****/ 
 		
 	}
-	void Line(Vector3 gridcenter){
-		// Set dummy waypoints 
-		waypoints[0] = new Vector3(gridcenter.x,gridcenter.y,gridcenter.z);
-		waypoints[1] = new Vector3(gridcenter.x + 20, gridcenter.y, gridcenter.z);
-		waypoints[2] = new Vector3(gridcenter.x + 20, gridcenter.y + 20, gridcenter.z);
-		waypoints[3] = new Vector3(gridcenter.x + 30, gridcenter.y + 20, gridcenter.z);
-		waypoints[4] = new Vector3(gridcenter.x + 30, gridcenter.y + 30, gridcenter.z);
-		
-		// for (int i = 0; i < waypoints.Length; i++){
-		//  	vals[i] = points[i].position;
-		//  }
-		
-		for (int i = 0; i < seg; i++){
-		 	//float t = i / (float)seg;
-		 	linerender.positionCount = seg;
-		 	linerender.SetPositions(waypoints);
-		}
-	}
+	void Line(Vector3 startingpos, Vector3 endingpos){
+        /**** AMEL'S CODE ****/
+        //// Set dummy waypoints 
+        //waypoints[0] = new Vector3(gridcenter.x,gridcenter.y,gridcenter.z);
+        //waypoints[1] = new Vector3(gridcenter.x + 20, gridcenter.y, gridcenter.z);
+        //waypoints[2] = new Vector3(gridcenter.x + 20, gridcenter.y + 20, gridcenter.z);
+        //waypoints[3] = new Vector3(gridcenter.x + 30, gridcenter.y + 20, gridcenter.z);
+        //waypoints[4] = new Vector3(gridcenter.x + 30, gridcenter.y + 30, gridcenter.z);
+
+        //// for (int i = 0; i < waypoints.Length; i++){
+        ////  	vals[i] = points[i].position;
+        ////  }
+
+        //for (int i = 0; i < seg; i++){
+        // 	//float t = i / (float)seg;
+        // 	linerender.positionCount = seg;
+        // 	linerender.SetPositions(waypoints);
+        //}
+        /**** END ****/
+
+        Debug.Log("IN LINE");
+
+        // TRYING TO USE CELL POSITIONS?? 
+        //int howFarx = (int)startingcell.x - (int)endingcell.x;
+        //int howFary = (int)startingcell.y - (int)endingcell.y;
+        //Vector3[] waypointsX = new Vector3[howFarx];
+        //Vector3[] waypointsY = new Vector3[howFary];
+        // PROBLEM: CURRENLTY ONLY WORKS FOR POSITIVE VALUES 
+        //for (int i = 0; i < howFarx; i++)
+        //{
+        //    waypointsX[i] = new Vector3(startingcell.x + i, startingcell.y);
+        //}
+        //for (int i = 0; i < howFary; i++)
+        //{
+        //    waypointsY[i] = new Vector3(startingcell.x + howFarx, startingcell.y + i);
+        //}
+
+        //linerender.SetPositions(waypointsX);
+        //linerender.SetPositions(waypointsY);
+
+        // TRYING TO USE LOCAL POSITION??
+        float howFarx = startingpos.x - endingpos.x;
+        float howFary = startingpos.z - endingpos.z; 
+        Debug.Log(howFarx);
+        Debug.Log(howFary);
+
+        // THIS DOESN'T WORK BECAUSE ROUNDING IS NOT TAKEN INTO ACCOUNT, SO IT'S
+        // ALWAYS SLIGHTLY DIFFERENT 
+        howFarx = (int)(howFarx * 100);
+        howFary = (int)(howFary * 100);
+
+        Debug.Log(howFarx);
+        Debug.Log(howFary); 
+
+        Vector3Int startingcell = gridWorld.LocalToCell(startingpos);
+
+        for(int i = 0; i < howFarx; i++)
+        {
+            tilemap.MakeTile(startingcell.x + i, startingcell.z); 
+        }
+        for(int i = 0; i < howFary; i++)
+        {
+            tilemap.MakeTile(startingcell.x + (int)howFarx, startingcell.z + i); 
+        }
+
+    }
 }
