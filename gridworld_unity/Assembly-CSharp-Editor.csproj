@@ -63,9 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Vuforia\Editor\Scripts\OpenSourceInitializer.cs" />
+    <None Include="Assets\Editor\Vuforia\VuforiaMars_ModelTarget\authoringinfo.xml" />
     <None Include="Assets\Editor\Vuforia\TargetsetData\QR_Tracker_info.xml" />
     <None Include="Assets\Editor\Vuforia\Emulator\VuforiaEmulator.xml" />
     <None Include="Assets\Editor\Vuforia\TargetsetData\VuforiaMars_Object_info.xml" />
+    <None Include="Assets\Editor\Vuforia\ForPrint\ModelTarget\readme_3dprint.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/17dempsey/Desktop/SummerResearch2019/ARgridworld/gridworld_unity/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
